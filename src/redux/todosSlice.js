@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { v4 as uuidv4 } from 'uuid';
 
 export const todosSlice = createSlice({
   name: 'todos',
@@ -8,14 +9,26 @@ export const todosSlice = createSlice({
       const { date, description } = action.payload;
 
       if (state[date]) {
-        state[date].push({description, completed: false})
+        state[date].push({id: uuidv4(), description, completed: false})
       } else {
-        state[date] = [{description, completed: false}]
+        state[date] = [{id: uuidv4(), description, completed: false}]
       }
-    }
+    },
+    updateTodo(state, action) {
+      const { date, description, id } = action.payload;
+
+      state[date].forEach(todo => {
+        if (todo.id === id) {
+          todo.description = description
+        }
+      });
+    },
+    // deleteTodo(state, action) {
+
+    // }
   }
 })
 
-export const { addTodo } = todosSlice.actions
+export const { addTodo, updateTodo } = todosSlice.actions
 
 export default todosSlice.reducer

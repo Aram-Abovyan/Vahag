@@ -40,7 +40,7 @@ function App() {
                   // console.log('date', date)
                   // console.log('list', list)
                   return (
-                    <li key={uuidv4()}>{date} : count {list.length}<Link to={`/todos/${date}`}>Details</Link></li>
+                    <li key={uuidv4()}>{date} : count {list.length}:  <Link to={`/todos/${date}`}>Details</Link></li>
                   )
                 })}
               </ul>
